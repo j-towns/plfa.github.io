@@ -512,7 +512,8 @@ two natural numbers, now adapted to the intrinsically-typed
 de Bruijn representation.
 
 ```
--- Your code goes here
+mul : ∀ {Γ} → Γ ⊢ `ℕ ⇒ `ℕ ⇒ `ℕ
+mul = μ ƛ ƛ case (# 1) `zero (plus · # 1 · (# 3 · # 0 · # 1))
 ```
 
 
@@ -999,7 +1000,15 @@ not reduce, and its corollary, terms that reduce are not
 values.
 
 ```
--- Your code goes here
+V¬—→ : ∀ {Γ A} {V N : Γ ⊢ A}
+  → Value V
+  → ¬ (V —→ N)
+V¬—→ (V-suc VV) (ξ-suc V—→N) = V¬—→ VV V—→N
+
+—→¬V : ∀ {Γ A} {V N : Γ ⊢ A}
+  → V —→ N
+  → ¬ (Value V)
+—→¬V V—→N VV = V¬—→ VV V—→N
 ```
 
 ## Progress

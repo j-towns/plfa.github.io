@@ -128,7 +128,12 @@ are in bisimulation.
 We import our source language from
 Chapter [More](/More/):
 ```
+open import Data.Bool.Base using (Bool; true; false; T; _∧_; _∨_; not)
+open import Data.Nat using (_≤?_)
+open import Relation.Nullary using (Dec; yes; no)
+open import Relation.Nullary.Decidable using (⌊_⌋; True; toWitness; fromWitness)
 open import plfa.part2.More
+
 ```
 
 
@@ -180,7 +185,6 @@ to use a decidable predicate to pick out terms in the domain of `_†`, using
 [proof by reflection](/Decidable/#proof-by-reflection).
 
 ```
--- Your code goes here
 ```
 
 
@@ -209,7 +213,12 @@ Show that this also holds in the reverse direction: if `M ~ M†`
 and `Value M†` then `Value M`.
 
 ```
--- Your code goes here
+~val⁻¹ : ∀ {Γ A} {M M† : Γ ⊢ A}
+  → M ~ M†
+  → Value M†
+    --------
+  → Value M
+~val⁻¹ (~ƛ M~M†) V-ƛ = V-ƛ
 ```
 
 

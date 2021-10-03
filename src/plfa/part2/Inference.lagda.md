@@ -220,9 +220,9 @@ Similarly, given context `Γ`, inherited term `M`, and type `A`, we
 must decide whether `Γ ⊢ M ↓ A` holds, or its negation.
 
 Our proof is constructive. In the synthesised case, it will either
-deliver a pair of a type `A` and evidence that `Γ ⊢ M ↓ A`, or a function
+deliver a pair of a type `A` and evidence that `Γ ⊢ M ↑ A`, or a function
 that given such a pair produces evidence of a contradiction. In the inherited
-case, it will either deliver evidence that `Γ ⊢ M ↑ A`, or a function
+case, it will either deliver evidence that `Γ ⊢ M ↓ A`, or a function
 that given such evidence produces evidence of a contradiction.
 The positive case is referred to as _soundness_ --- synthesis and inheritance
 succeed only if the corresponding relation holds.  The negative case is
@@ -580,9 +580,9 @@ such that `Γ ∋ x ⦂ A` holds, then there is also no type `A` such that
 ```
 ext∋ : ∀ {Γ B x y}
   → x ≢ y
-  → ¬ ∃[ A ]( Γ ∋ x ⦂ A )
+  → ¬ (∃[ A ]( Γ ∋ x ⦂ A ))
     -----------------------------
-  → ¬ ∃[ A ]( Γ , y ⦂ B ∋ x ⦂ A )
+  → ¬ (∃[ A ]( Γ , y ⦂ B ∋ x ⦂ A ))
 ext∋ x≢y _  ⟨ A , Z ⟩       =  x≢y refl
 ext∋ _   ¬∃ ⟨ A , S _ ∋x ⟩  =  ¬∃ ⟨ A , ∋x ⟩
 ```
@@ -639,7 +639,7 @@ there is no term `B′` such that `Γ ⊢ L · M ↑ B′` holds:
   → Γ ⊢ L ↑ A ⇒ B
   → ¬ Γ ⊢ M ↓ A
     ----------------------------
-  → ¬ ∃[ B′ ]( Γ ⊢ L · M ↑ B′ )
+  → ¬ (∃[ B′ ]( Γ ⊢ L · M ↑ B′ ))
 ¬arg ⊢L ¬⊢M ⟨ B′ , ⊢L′ · ⊢M′ ⟩ rewrite dom≡ (uniq-↑ ⊢L ⊢L′) = ¬⊢M ⊢M′
 ```
 Let `⊢L` be evidence that `Γ ⊢ L ↑ A ⇒ B` holds and `¬⊢M` be evidence
